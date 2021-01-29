@@ -7,18 +7,10 @@ public class Crash extends Wallet{
     public void play(){
         calculateCrash();
         printMultiplier();
-        for (float i = 0; i <= multiplier; i += 0.01) {
-            String formattedString = String.format("%.02f", i);
-            System.out.print("multiplier: " + formattedString + "% " +"\r");
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 
-        System.out.println("Multiplier: " + multiplier);
+
     }
+
     // while loop generating random number and then randomly stop the loop with a random value
     public void calculateCrash(){
         int firstBase = 0;
@@ -29,9 +21,12 @@ public class Crash extends Wallet{
         for(int x=0; x<limiter1; x++){
             firstBase = randint.nextInt(10000);
         }
-        if(firstBase <= 6500) {
+        if(firstBase <= 250){
+            secondBase = randint.nextInt(10)       ;
+            multiplier = 1 + (float)secondBase / 100F;
+        }else if(firstBase <= 6500) {
             secondBase = randint.nextInt(100);
-            multiplier = 1 + (float) secondBase / 100F;
+            multiplier = 1 + (float)secondBase / 100F;
         }else if(firstBase <=9750){
             secondBase = randint.nextInt(100);
             multiplier = 1 + (float)secondBase/50F;
@@ -47,24 +42,16 @@ public class Crash extends Wallet{
     }
 
     public void printMultiplier(){
-        for(float x = 0; x < multiplier; x++){
-            System.out.println(multiplier);
-        }
-    }
-
-    public  void main(String[] args) {
-        char[] animationChars = new char[]{'|', '/', '-', '\\'};
-
-        for (int i = 0; i <= 100; i++) {
-            System.out.print("Processing: " + i + "% " + animationChars[i % 4] + "\r");
-
+        for (float i = 1; i <= multiplier; i += 0.01) {
+            String formattedString = String.format("%.02f", i);
+            System.out.print("multiplier: " + formattedString + "\r");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Processing: Done!          ");
+        System.out.println("Multiplier: " + multiplier);
     }
+
 }
