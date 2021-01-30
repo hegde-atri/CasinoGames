@@ -1,7 +1,7 @@
 public class Wallet {
 
-    protected float money;
-    protected float debt;
+    public float money;
+    public float debt;
 
     public Wallet(float money, float debt){
         this.money = money;
@@ -21,6 +21,11 @@ public class Wallet {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Balance remaining: " + money;
     }
 
     public float getMoney(){
