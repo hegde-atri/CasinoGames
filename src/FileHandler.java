@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileHandler {
-    public  String folderDirectory = System.getProperty("user.dir") + "\\userData.txt";
+    public static String folderDirectory = System.getProperty("user.dir") + "\\userData.txt";
 
-    public  void writeFile(ArrayList<User> userList){
+    public static void writeFile(ArrayList<User> userList){
         try{
             FileWriter writeToFile = new FileWriter(folderDirectory, true);
             PrintWriter printToFile = new PrintWriter(writeToFile);
@@ -18,7 +18,7 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<User> readFile(){
+    public static ArrayList<User> readFile(){
         ArrayList<User> userList = new ArrayList<>();
         String lineFromFile;
         try{
