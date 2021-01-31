@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileHandler {
+
     public static String folderDirectory = System.getProperty("user.dir") + "\\userData.txt";
 
     public static void writeFile(ArrayList<User> userList){

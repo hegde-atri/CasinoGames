@@ -6,7 +6,6 @@ public class Wallet {
         this.money = Float.parseFloat(money);
     }
 
-
     public void printAnimatedWallet(){
         String[] animatedWallet = new String[]{"\r Your current balance is","\r      " + this.money};
         for(int i = 0; i < 2; i++) {
@@ -32,6 +31,10 @@ public class Wallet {
 
     public void setMoney(float newMoney){
         this.money = newMoney;
+    }
+
+    public void addMoney(float addMoney){
+        this.money += addMoney;
     }
 
 

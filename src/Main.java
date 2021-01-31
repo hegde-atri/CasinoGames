@@ -1,17 +1,19 @@
-import java.io.IOException;
 import java.util.*;
-import java.util.logging.FileHandler;
-
 
 public class Main {
 
-    //username = atri, password = myProgram
+    //username = Atri, password = myProgram
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<User> userList = new ArrayList<>();
     
 
     public static void main(String[] args){
-        mainMenu(new User("Atri", "2004", "25000"));
+        SlotMachine x = new SlotMachine();
+        x.printNums();
+
+
+//        mainMenu(new User("Atri", "2004", "25000"));
+
     }
 
 
@@ -35,7 +37,6 @@ public class Main {
             System.out.println("3. View wallet balance");
             System.out.println("9. Save and Exit");
             System.out.println("0. Quit");
-            System.out.print(": ");
             int userChoice = sc.nextInt();
             switch (userChoice) {
                 case 1:
@@ -160,8 +161,10 @@ public class Main {
 //            System.out.println("Error: " + e);
 //        }
 //
-//        return passwordArray;
+//        return passwordArray
 //    }
+
+
 
 
 
