@@ -83,26 +83,37 @@ public class Main {
         x.multiplier = 1;
         x.currentCard = x.cardNumber();
         x.currentSuit = x.cardSuit(x.currentCard);
-        System.out.println(x.cards[x.currentCard] + " " + x.currentSuit);
+
 
         while(game){
+            System.out.println("\n" + x.cards[x.currentCard] + " " + x.currentSuit);
+            String formattedString = String.format("%.02f", x.multiplier);
+            System.out.println("Current Multiplier: " + formattedString);
             x.userChoose();
             x.oldCard = x.currentCard;
             x.oldSuit = x.currentSuit;
             x.currentCard = x.cardNumber();
             x.currentSuit = x.cardSuit(x.currentCard);
 
-            if((x.currentCard > x.oldCard) && x.userChoice == 1) {
+            if(x.userChoice == 0){
+                System.out.println("Starting money: " + x.transfer);
+                System.out.println("Current amount: " + (x.multiplier * x.transfer));
+                System.out.println("-------------------\n");
+                userWallet.money += (x.multiplier * x.transfer);
+                game = false;
+            }else if((x.currentCard > x.oldCard) && x.userChoice == 1) {
                 System.out.println("+0.2x");
                 x.multiplier += 0.2;
             }else if((x.currentCard < x.oldCard) && x.userChoice == 2){
                 System.out.println("+0.2x");
                 x.multiplier += 0.2;
             }else if(x.currentCard == x.oldCard){
+                x.multiplier += 0.1;
                 System.out.println("The next card had the same value, +0.1x !");
             }else{
                 System.out.println("You guessed wrong, the next card was: " + x.cards[x.currentCard]+" "+x.currentSuit);
-                System.out.println("");
+                System.out.println("You have lost " + x.transfer);
+                game = false;
             }
         }
 

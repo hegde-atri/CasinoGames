@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.*;
 
 public class HigherLower {
@@ -23,13 +25,13 @@ public class HigherLower {
                     return "\u2660";
                 case 1:
                     //hearts
-                    return "";
+                    return "\u2661";
                 case 2:
                     //clubs
-                    return "";
+                    return "\u2663";
                 case 3:
                     //diamonds
-                    return "";
+                    return "\u2662";
                 default:
                     //this is logically not needed however, it doesn't compile without it since it doesnt know int a has definite limits
                     return "";
@@ -40,7 +42,7 @@ public class HigherLower {
 
     public void userChoose(){
         Scanner sc = new Scanner(System.in);
-        //we need to make sure there is a way for the user to leave with his profits when he is happy
+        //we need to make sure there is a way for the user to leave with his profits when he is happy.
         System.out.println("Higher(1) or lower(2)      [to leave with profit use 0]");
         int x = sc.nextInt();
         switch(x){
@@ -73,7 +75,6 @@ public class HigherLower {
         }
 
     }
-
 
 
 }
