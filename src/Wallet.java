@@ -1,16 +1,14 @@
 public class Wallet {
 
     public float money;
-    public float debt;
 
-    public Wallet(float money, float debt){
-        this.money = money;
-        this.debt = debt;
+    public Wallet(String money){
+        this.money = Float.parseFloat(money);
     }
 
 
     public void printAnimatedWallet(){
-        String[] animatedWallet = new String[]{"\r Your current balance is","\r      " + this.money , "\r Your current debt is", "\r      " + this.debt};
+        String[] animatedWallet = new String[]{"\r Your current balance is","\r      " + this.money};
         for(int i = 0; i < 2; i++) {
             for (String x : animatedWallet) {
                 System.out.print(x);
