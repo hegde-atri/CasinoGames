@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 import java.util.*;
 
 public class Main {
@@ -13,7 +11,6 @@ public class Main {
         userList = FileHandler.readFile();
         mainMenu();
     }
-
 
     public static void innerMenu(User currentUser) {
         userList = FileHandler.readFile();
@@ -61,13 +58,6 @@ public class Main {
                 System.out.println("\nSuccessfully Logged out\n");
                 break;
             }
-        }
-    }
-
-
-    public static void printUsers() {
-        for(User x : userList){
-            System.out.println(x.toString());
         }
     }
 
