@@ -54,6 +54,9 @@ public class Crash {
             System.out.println("input cannot be equal to or less than 0");
             System.out.println("!!No money has been bet!!");
             this.transfer = 0;
+        }else if(this.transfer > userWallet.money){
+            System.out.println("You don't have the money fool!");
+            this.transfer = 0;
         }
         String formattedString = String.format("%.02f", this.transfer);
         System.out.println("Your bet of £" + formattedString + " has been placed");

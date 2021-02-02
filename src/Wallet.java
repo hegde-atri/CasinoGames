@@ -22,7 +22,7 @@ public class Wallet {
 
     @Override
     public String toString() {
-        return "Balance remaining: " + money;
+        return Float.toString(money);
     }
 
     public float getMoney(){

@@ -10,6 +10,10 @@ public class User {
         this.UserWallet = new Wallet(userWallet);
     }
 
+    public String toString(){
+        return username + "," + password + "," + UserWallet;
+    }
+
     public String getUsername() {
         return this.username;
     }

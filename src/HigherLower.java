@@ -67,7 +67,11 @@ public class HigherLower {
             System.out.println("!!No money has been bet!!");
             this.transfer = 0;
             return false;
-        }else {
+        }else if(this.transfer > userWallet.money){
+            System.out.println("You don't have the money fool!");
+            this.transfer = 0;
+            return false;
+        }else{
             String formattedString = String.format("%.02f", this.transfer);
             System.out.println("Your bet of £" + formattedString + " has been placed");
             userWallet.money -= this.transfer;

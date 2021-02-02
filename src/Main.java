@@ -4,22 +4,18 @@ import java.util.*;
 
 public class Main {
 
-    //username = Atri, password = 2004
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<User> userList = new ArrayList<>();
-    
 
-    public static void main(String[] args){
+
+
+    public static void main(String[] args) {
         userList = FileHandler.readFile();
-        mainMenu(new User("Atri", "2004", "25000"));
-
-
-
+        mainMenu();
     }
 
 
-
-    public static void mainMenu(User currentUser) {
+    public static void innerMenu(User currentUser) {
         userList = FileHandler.readFile();
 
         String[] animatedWelcome = new String[]{"\r ---------------------- ", "\r  Welcome to my Casino ", "\r From the beginning you will have £25,000", "\r As soon as your balance hits 0, you lose", "\r \"True luck consists not\""};
@@ -33,12 +29,12 @@ public class Main {
         }
 
         while (true) {
+            boolean userLogOut = false;
             System.out.print("\rWhat game would you like to play? \n");
             System.out.println("1. Play crash");
             System.out.println("2. Higher or Lower");
             System.out.println("3. View wallet balance");
             System.out.println("9. Save and Exit");
-            System.out.println("0. Quit");
             int userChoice = sc.nextInt();
             switch (userChoice) {
                 case 1:
@@ -50,16 +46,28 @@ public class Main {
                 case 3:
                     currentUser.UserWallet.printAnimatedWallet();
                     break;
-                case 9:
+                case 5:
+                    userLogOut = true;
+                    break;
+                default:
                     FileHandler.writeFile(userList);
                     System.exit(1);
-                default:
-                    System.exit(0);
                     break;
             }
-            if(currentUser.UserWallet.getMoney() <= 0){
+            if (currentUser.UserWallet.getMoney() <= 0) {
                 System.out.println("You have run out of money and have lost!!");
             }
+            if(userLogOut){
+                System.out.println("\nSuccessfully Logged out\n");
+                break;
+            }
+        }
+    }
+
+
+    public static void printUsers() {
+        for(User x : userList){
+            System.out.println(x.toString());
         }
     }
 
@@ -76,17 +84,20 @@ public class Main {
 
     }
 
-    public static void playHigherLower(Wallet userWallet){
+    public static void playHigherLower(Wallet userWallet) {
 
         HigherLower x = new HigherLower();
         boolean game = x.takeBet(userWallet);
+        if (!game) {
+            System.out.println("Exiting to main menu due to invalid input!");
+        }
 
         x.multiplier = 1;
         x.currentCard = x.cardNumber();
         x.currentSuit = x.cardSuit(x.currentCard);
 
 
-        while(game){
+        while (game) {
             System.out.println("\n" + x.cards[x.currentCard] + " " + x.currentSuit);
             String formattedString = String.format("%.02f", x.multiplier);
             System.out.println("Current Multiplier: " + formattedString);
@@ -96,33 +107,32 @@ public class Main {
             x.currentCard = x.cardNumber();
             x.currentSuit = x.cardSuit(x.currentCard);
 
-            if(x.userChoice == 0){
+            if (x.userChoice == 0) {
                 System.out.println("Starting money: " + x.transfer);
                 System.out.println("Current amount: " + (x.multiplier * x.transfer));
                 System.out.println("-------------------\n");
                 userWallet.money += (x.multiplier * x.transfer);
                 game = false;
-            }else if((x.currentCard > x.oldCard) && x.userChoice == 1) {
+            } else if ((x.currentCard > x.oldCard) && x.userChoice == 1) {
                 System.out.println("+0.2x");
                 x.multiplier += 0.2;
-            }else if((x.currentCard < x.oldCard) && x.userChoice == 2){
+            } else if ((x.currentCard < x.oldCard) && x.userChoice == 2) {
                 System.out.println("+0.2x");
                 x.multiplier += 0.2;
-            }else if(x.currentCard == x.oldCard){
+            } else if (x.currentCard == x.oldCard) {
                 x.multiplier += 0.1;
                 System.out.println("The next card had the same value, +0.1x !");
-            }else{
-                System.out.println("You guessed wrong, the next card was: " + x.cards[x.currentCard]+" "+x.currentSuit);
+            } else {
+                System.out.println("You guessed wrong, the next card was: " + x.cards[x.currentCard] + " " + x.currentSuit);
                 System.out.println("You have lost " + x.transfer);
                 game = false;
             }
         }
 
 
-
     }
 
-    public static void playSlot(Wallet userWallet){
+    public static void playSlot(Wallet userWallet) {
         SlotMachine x = new SlotMachine();
         x.takeBet(userWallet);
         x.printNums();
@@ -131,73 +141,71 @@ public class Main {
 
     }
 
-
-
-
-
-    public static class LogInSystem{
-
-        public static void mainMenu(){
+    public static void mainMenu() {
+        while(true) {
             System.out.println("------------------");
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Exit");
+            System.out.println("------------------");
             int userChoice = sc.nextInt();
-            switch(userChoice){
+            switch (userChoice) {
                 case 1:
                     logIn();
+
                     break;
                 case 2:
                     createNew();
                     break;
                 default:
-                    System.out.println("hey");
-//                    System.out.exit(1);
+                    System.exit(1);
 
             }
         }
+    }
 
-        public static void logIn(){
-            System.out.print("Enter your username: ");
-            String username = sc.next();
-            System.out.print("\rEnter your password: ");
-            String password = sc.next();
-            for(User x : userList){
-                if(username.equals(x.username)){
-                    if(password.equals(x.password)){
-                        System.out.println("login successful!");
-                    }
+    public static void logIn() {
+        System.out.print("Enter your username: ");
+        String username = sc.next();
+        System.out.print("\rEnter your birth year: ");
+        String password = sc.next();
+        for (User x : userList) {
+            if (username.equals(x.username)) {
+                if (password.equals(x.password)) {
+                    System.out.println("login successful!");
+                    innerMenu(x);
                 }
             }
         }
-
-        public static void createNew(){
-            System.out.print("Enter your username: ");
-            String setUsername = sc.next();
-            System.out.println("Enter your birth year: ");
-            String setPassword = sc.next();
-            System.out.println("Choose how much money you start with: ");
-            System.out.println("1. 5000");
-            System.out.println("2. 10,000");
-            System.out.println("3. 25,000");
-            int userChoice = sc.nextInt();
-            switch(userChoice){
-                case 1:
-                    userList.add(new User(setUsername, setPassword, "5000"));
-                    break;
-                case 2:
-                    userList.add(new User(setUsername, setPassword, "10000"));
-                    break;
-                default:
-                    userList.add(new User(setUsername, setPassword, "25000"));
-                    break;
-            }
-        }
-
     }
 
+    public static void createNew() {
+        System.out.print("Enter your username: ");
+        String setUsername = sc.next();
+        System.out.print("Enter your birth year: ");
+        String setPassword = sc.next();
+        System.out.println("Choose how much money you start with: ");
+        System.out.println("1. 5000");
+        System.out.println("2. 10,000");
+        System.out.println("3. 25,000");
+        int userChoice = sc.nextInt();
+        switch (userChoice) {
+            case 1:
+                userList.add(new User(setUsername, setPassword, "5000"));
+                break;
+            case 2:
+                userList.add(new User(setUsername, setPassword, "10000"));
+                break;
+            default:
+                userList.add(new User(setUsername, setPassword, "25000"));
+                break;
+        }
+        System.out.println("\n User account successfully created!\n");
+
+        logIn();
 
 
+    }
 
 //    public static User authenticater() {
 //        boolean done = false;
@@ -231,9 +239,5 @@ public class Main {
 //
 //        return passwordArray;
 //    }
-
-
-
-
 
 }

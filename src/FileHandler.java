@@ -26,7 +26,7 @@ public class FileHandler {
             BufferedReader read = new BufferedReader(new FileReader(folderDirectory));
             while((lineFromFile = read.readLine()) != null){
                 String[] userDetails = lineFromFile.split(",");
-                User newUser = new User(userDetails[0], userDetails[1], userDetails[3]);
+                User newUser = new User(userDetails[0], userDetails[1], userDetails[2]);
                 userList.add(newUser);
             }
             read.close();

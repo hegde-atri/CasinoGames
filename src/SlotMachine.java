@@ -21,6 +21,9 @@ public class SlotMachine {
             System.out.println("input cannot be equal to or less than 0");
             System.out.println("!!No money has been bet!!");
             bet = 0;
+        }else if(bet > userWallet.money){
+            System.out.println("You don't have the money fool!");
+            bet = 0;
         }
         String formattedString = String.format("%.02f", bet);
         System.out.println("Your bet of £" + formattedString + " has been placed");
