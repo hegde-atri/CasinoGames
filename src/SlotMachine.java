@@ -2,16 +2,15 @@ import java.util.*;
 
 public class SlotMachine {
 
-    private float bet;
     protected Scanner sc = new Scanner(System.in);
+    private float bet;
     private int num1;
     private int num2;
     private int num3;
 
-
     public int getNum() {
         Random randint = new Random();
-        return randint.nextInt(9);
+        return randint.nextInt(7);
 
     }
 
@@ -48,13 +47,19 @@ public class SlotMachine {
         }
     }
 
-    public void checkValue(){
-
+    public void checkValue(Wallet userWallet){
+        if(num1==num2 && num2==num3){
+            System.out.println("2x multiplier woooooooooo");
+            userWallet.money += (bet * 2);
+        }else if(num2 <= (num3+2) && (num1-2) <=2){
+            System.out.println("1.3x multiplier, cool ");
+            userWallet.money += (bet*1.3);
+        }else{
+            System.out.println("No luck this time :/");
+            System.out.println("Get trolled noob lmao");
+        }
     }
 
-    public void getResult(){
-
-    }
 
 }
 

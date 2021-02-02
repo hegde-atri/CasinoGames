@@ -10,5 +10,27 @@ public class User {
         this.UserWallet = new Wallet(userWallet);
     }
 
+    public String getUsername() {
+        return this.username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Wallet getUserWallet() {
+        return this.UserWallet;
+    }
+
+    public void setUserWallet(Wallet userWallet) {
+        UserWallet = userWallet;
+    }
 }

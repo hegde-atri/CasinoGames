@@ -11,8 +11,6 @@ public class Main {
 
     public static void main(String[] args){
         userList = FileHandler.readFile();
-        SlotMachine x = new SlotMachine();
-        x.printNums();
         mainMenu(new User("Atri", "2004", "25000"));
 
 
@@ -58,8 +56,6 @@ public class Main {
                 default:
                     System.exit(0);
                     break;
-
-
             }
             if(currentUser.UserWallet.getMoney() <= 0){
                 System.out.println("You have run out of money and have lost!!");
@@ -126,17 +122,15 @@ public class Main {
 
     }
 
-    public static void playSlot(User currentUser){
+    public static void playSlot(Wallet userWallet){
         SlotMachine x = new SlotMachine();
-        x.takeBet(currentUser.UserWallet);
+        x.takeBet(userWallet);
+        x.printNums();
+        System.out.println();
+        x.checkValue(userWallet);
 
     }
 
-    public static void authenticator(){
-
-
-
-    }
 
 
 
@@ -178,9 +172,27 @@ public class Main {
         }
 
         public static void createNew(){
-
+            System.out.print("Enter your username: ");
+            String setUsername = sc.next();
+            System.out.println("Enter your birth year: ");
+            String setPassword = sc.next();
+            System.out.println("Choose how much money you start with: ");
+            System.out.println("1. 5000");
+            System.out.println("2. 10,000");
+            System.out.println("3. 25,000");
+            int userChoice = sc.nextInt();
+            switch(userChoice){
+                case 1:
+                    userList.add(new User(setUsername, setPassword, "5000"));
+                    break;
+                case 2:
+                    userList.add(new User(setUsername, setPassword, "10000"));
+                    break;
+                default:
+                    userList.add(new User(setUsername, setPassword, "25000"));
+                    break;
+            }
         }
-
 
     }
 
@@ -217,7 +229,7 @@ public class Main {
 //            System.out.println("Error: " + e);
 //        }
 //
-//        return passwordArray
+//        return passwordArray;
 //    }
 
 
