@@ -1,24 +1,28 @@
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.*;
 
 public class Main {
 
-    //username = Atri, password = myProgram
+    //username = Atri, password = 2004
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<User> userList = new ArrayList<>();
     
 
     public static void main(String[] args){
+        userList = FileHandler.readFile();
         SlotMachine x = new SlotMachine();
         x.printNums();
+        mainMenu(new User("Atri", "2004", "25000"));
 
 
-//        mainMenu(new User("Atri", "2004", "25000"));
 
     }
 
 
 
     public static void mainMenu(User currentUser) {
+        userList = FileHandler.readFile();
 
         String[] animatedWelcome = new String[]{"\r ---------------------- ", "\r  Welcome to my Casino ", "\r From the beginning you will have £25,000", "\r As soon as your balance hits 0, you lose", "\r \"True luck consists not\""};
         for (String x : animatedWelcome) {
@@ -49,7 +53,7 @@ public class Main {
                     currentUser.UserWallet.printAnimatedWallet();
                     break;
                 case 9:
-                    //FileHandler.writeFile(userList);
+                    FileHandler.writeFile(userList);
                     System.exit(1);
                 default:
                     System.exit(0);
@@ -122,6 +126,63 @@ public class Main {
 
     }
 
+    public static void playSlot(User currentUser){
+        SlotMachine x = new SlotMachine();
+        x.takeBet(currentUser.UserWallet);
+
+    }
+
+    public static void authenticator(){
+
+
+
+    }
+
+
+
+
+    public static class LogInSystem{
+
+        public static void mainMenu(){
+            System.out.println("------------------");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Exit");
+            int userChoice = sc.nextInt();
+            switch(userChoice){
+                case 1:
+                    logIn();
+                    break;
+                case 2:
+                    createNew();
+                    break;
+                default:
+                    System.out.println("hey");
+//                    System.out.exit(1);
+
+            }
+        }
+
+        public static void logIn(){
+            System.out.print("Enter your username: ");
+            String username = sc.next();
+            System.out.print("\rEnter your password: ");
+            String password = sc.next();
+            for(User x : userList){
+                if(username.equals(x.username)){
+                    if(password.equals(x.password)){
+                        System.out.println("login successful!");
+                    }
+                }
+            }
+        }
+
+        public static void createNew(){
+
+        }
+
+
+    }
 
 
 
@@ -146,11 +207,6 @@ public class Main {
 //            }
 //        }
 //    }
-
-
-
-
-
 //    public static char[] getPassword() {
 //        Console cnsl = null;
 //        char[] passwordArray = new char[9];
