@@ -13,8 +13,6 @@ public class Main {
     }
 
     public static void innerMenu(User currentUser) {
-        userList = FileHandler.readFile();
-
         String[] animatedWelcome = new String[]{"\r ---------------------- ", "\r  Welcome to my Casino ", "\r From the beginning you will have £25,000", "\r As soon as your balance hits 0, you lose", "\r \"True luck consists not\""};
         for (String x : animatedWelcome) {
             System.out.print(x);
@@ -162,7 +160,7 @@ public class Main {
         for (User x : userList) {
             if (username.equals(x.username)) {
                 if (password.equals(x.password)) {
-                    System.out.println("login successful!");
+                    System.out.println("login successful!\n");
                     innerMenu(x);
                 }
             }
