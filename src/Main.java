@@ -17,7 +17,7 @@ public class Main {
         for (String x : animatedWelcome) {
             System.out.print(x);
             try {
-                Thread.sleep(500);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
