@@ -27,8 +27,10 @@ public class Main {
             boolean userLogOut = false;
             System.out.print("\rWhat game would you like to play? \n");
             System.out.println("1. Play crash");
-            System.out.println("2. Higher or Lower");
-            System.out.println("3. View wallet balance");
+            System.out.println("2. Play higher or Lower");
+            System.out.println("3. Play Slot machine");
+            System.out.println("4. View wallet balance");
+            System.out.println("5. Log out");
             System.out.println("9. Save and Exit");
             int userChoice = sc.nextInt();
             switch (userChoice) {
@@ -39,6 +41,9 @@ public class Main {
                     playHigherLower(currentUser.UserWallet);
                     break;
                 case 3:
+                    playSlot(currentUser.UserWallet);
+                    break;
+                case 4:
                     currentUser.UserWallet.printAnimatedWallet();
                     break;
                 case 5:
